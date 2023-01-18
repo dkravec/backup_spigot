@@ -1,4 +1,45 @@
-dateFileName="date +%Y-%m-%d" && echo `$dateFileName` && mkdir `${dateFileName}`_Test
+dateFileName="date +%Y-%m-%d"
+echo "Starting Spigot Backup Script"
+
+echo `Files will be named : ${dateFileName}`
+
+# creates backups directory if it doesn't exist
+echo "Starting Task 0"
+echo "Task 0.0: Checking if backups directory exists"
+if [ ! -d ~/backups/spigot ]; then
+    echo "Task 0.1: Creating backups directory"
+    mkdir -p ~/backups/spigot
+fi
+
+echo "Task 0.2: Checking if backup directory for today exists"
+if [ -d ~/backups/spigot/spigot_`${dateFileName}` ]; then
+    # echo "Task 0.2: Deleting old backups directory"
+    # rm -rf ~/backups/spigot/${dateFileName}
+
+    if [ "$1" == "-f" ]; then
+        echo "Task 0.2.1: Deleting old backups directory"
+        rm -rf ~/backups/spigot/spigot_`${dateFileName}`
+    fi
+
+    echo "Please add -f to force delete old backup for today"
+    exit
+fi
+
+echo "Task 0.3: Checking if backup tar for today exists"
+if [ -d ~/backups/spigot/`${dateFileName}`.tar.gz ]; then
+    # echo "Task 0.2: Deleting old backups directory"
+    # rm -rf ~/backups/spigot/${dateFileName}
+
+    if [ "$1" == "-f" ]; then
+        echo "Task 0.2.1: Deleting old backups directory"
+        rm -rf ~/backups/spigot/`${dateFileName}`.tar.gz
+    fi
+
+    echo "Please add -f to force delete old backup for today"
+    exit
+fi
+echo "Task 0 Complete"
+sleep 1
 
 # stops mc
 echo "Starting Task 1"
@@ -15,7 +56,7 @@ echo "Task 2.0: CD to Spigot Directory"
 cd ~/tank/spigot
 
 echo "Task 2.1: Creating Tar"
-tar -czvf 2023-01-18.tar.gz ./
+tar -czvf `${dateFileName}`.tar.gz ./
 echo "Task 2 Complete"
 sleep 1
 
