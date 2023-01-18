@@ -8,7 +8,7 @@ echo "Starting Task 0"
 echo "Task 0.0: Checking if backups directory exists"
 if [ ! -d ~/backups/spigot ]; then
     echo "Task 0.1: Creating backups directory"
-    mkdir -p ~/backups/spigot
+    mkdir ~/backups/spigot
 fi
 
 echo "Task 0.2: Checking if backup directory for today exists"
@@ -76,7 +76,7 @@ echo "Starting Task 4"
 echo "Task 4.0: CD to backups directory"
 cd ~/backups/spigot
 echo "Task 4.1: Creating directory for tar"
-mkdir `./spigot_${dateFileName}`
+mkdir ./spigot_`${dateFileName}`
 
 # moves tar
 echo "Task 4.2: Unzipping tar to new directory"

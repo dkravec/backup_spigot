@@ -20,3 +20,6 @@ This is a simple script that will backup your spigot server. It will create a fo
 ### v1.0.2 (3.2023.01.18)
 - Added a check to see if the backup directory, if not it will create it.
 - Added a check to see if there is a backup directory for today, if there is, it will delete it \*as long as there is a -f flag. Stands for force.
+
+### v1.0.3 (4.2023.01.18)
+- Fixed a bug where it wouldnt unzip the tar due to the name of the directory that was created.
