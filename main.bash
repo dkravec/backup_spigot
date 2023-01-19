@@ -1,42 +1,41 @@
 dateFileName="date +%Y-%m-%d"
 echo "Starting Spigot Backup Script"
 
-echo `Files will be named : ${dateFileName}`
+echo `Files will be named : `${dateFileName}`
 
 # creates backups directory if it doesn't exist
-echo "Starting Task 0"
-echo "Task 0.0: Checking if backups directory exists"
+echo "Starting Task 0: Directory Check"
+echo "Task 0.1: Checking if backups directory exists"
 if [ ! -d ~/backups/spigot ]; then
-    echo "Task 0.1: Creating backups directory"
+    echo "Backups directory did not previously exist"
+    echo "Task 0.1.1: Creating backups directory"
     mkdir ~/backups/spigot
+else then
+    echo "Backups directory previously existed, creation skipped"
 fi
 
 echo "Task 0.2: Checking if backup directory for today exists"
 if [ -d ~/backups/spigot/spigot_`${dateFileName}` ]; then
-    # echo "Task 0.2: Deleting old backups directory"
-    # rm -rf ~/backups/spigot/${dateFileName}
-
     if [ "$1" == "-f" ]; then
         echo "Task 0.2.1: Deleting old backups directory"
         rm -rf ~/backups/spigot/spigot_`${dateFileName}`
+    else then 
+        echo "ERROR: Please add -f to force delete old backup for today"
+        echo "Unable to continue"
+        exit
     fi
-
-    echo "Please add -f to force delete old backup for today"
-    exit
 fi
 
 echo "Task 0.3: Checking if backup tar for today exists"
 if [ -d ~/backups/spigot/`${dateFileName}`.tar.gz ]; then
-    # echo "Task 0.2: Deleting old backups directory"
-    # rm -rf ~/backups/spigot/${dateFileName}
-
     if [ "$1" == "-f" ]; then
         echo "Task 0.2.1: Deleting old backups directory"
         rm -rf ~/backups/spigot/`${dateFileName}`.tar.gz
+    else then 
+        echo "ERROR: Please add -f to force delete old backup for today"
+        echo "Unable to continue"
+        exit
     fi
-
-    echo "Please add -f to force delete old backup for today"
-    exit
 fi
 echo "Task 0 Complete"
 sleep 1

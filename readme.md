@@ -23,3 +23,6 @@ This is a simple script that will backup your spigot server. It will create a fo
 
 ### v1.0.3 (4.2023.01.18)
 - Fixed a bug where it wouldnt unzip the tar due to the name of the directory that was created.
+
+### v1.0.4 (5.2023.01.18)
+- Added better error messages.
