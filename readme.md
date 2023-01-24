@@ -26,3 +26,7 @@ This is a simple script that will backup your spigot server. It will create a fo
 
 ### v1.0.4 (5.2023.01.18)
 - Added better error messages.
+
+### v1.0.5 (6.2023.01.24)
+- Fixed error at launch
+- removed else then, to just else
