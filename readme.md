@@ -7,8 +7,10 @@ This is a simple script that will backup your spigot server. It will create a fo
 ## Flags
 | Flags | Description |
 | --- | --- |
-| -f | Force backup, even if it exists for today. Will delete. |
+| -s | Creates secondary backup for today if exists. |
+| -f | Force backup, even if it exists for today. **!!Will delete existing backup from current day!!** |
 | -h | Show the help menu. |
+| -u | Unzip the tar right away. |
 
 ## Version History
 ### v1.0 (1.2023.01.18)
@@ -30,3 +32,16 @@ This is a simple script that will backup your spigot server. It will create a fo
 ### v1.0.5 (6.2023.01.24)
 - Fixed error at launch
 - removed else then, to just else
+
+### v1.0.6 (7.2023.01.25)
+- Added option "-u", so it unzips if wanted.
+
+### v1.1 (8.2023.01.26)
+- Worked on Jan 25, and 26.
+- Created an -s option, so it will save the previous backup for the same day.
+- Rewrote structure of code, each section has a decicated function. 
+- commented -u code, until can have mutiple options
+- future updates:
+    - option to not unzip (nearly ready)
+    - mutiple options 
+    - temp directories for backup location/main location
