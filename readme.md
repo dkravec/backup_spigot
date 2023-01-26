@@ -45,3 +45,6 @@ This is a simple script that will backup your spigot server. It will create a fo
     - option to not unzip (nearly ready)
     - mutiple options 
     - temp directories for backup location/main location
+
+### v1.1.1 (9.2023.01.26)
+- Attempt to fix error with v1.1, causing it mess up the math.

@@ -5,8 +5,8 @@ echo "Starting Spigot Backup Script"
 echo "Files will be named : `${dateFileName}`"
 amountToday=0
 
-backupDir="~/backups/spigot"
-mainDir="~/tank/spigot"
+backupDir=~/backups/spigot
+mainDir=~/tank/spigot
 fileName=`${dateFileName}`
 
 findCurrentAmount() {
