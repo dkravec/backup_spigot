@@ -7,65 +7,43 @@ amountToday=0
 
 backupDir=~/backups/spigot
 mainDir=~/tank/spigot
+# backupDir=~/Backups
+# mainDir=~/Developer/cheese
 fileName=`${dateFileName}`
 
 findCurrentAmount() {
-    foundEnd="false"
-    currentFound=0
+    echo "Finding current amount of backups for today"
+    found="false"
+    let i=0
     while [ "$found" == "false" ];
     do
-        if [ "${currentFound}"==0 ]; then
-            if [ -d "${backupDir}/${dateFileName}.tar.gz" ]; then
-                currentFound=$((currentFound+1))
+        if [ "${i}" == 0 ]; then
+            echo "find 1.0 - Checking for first backup for today"
+            if [ -f "${backupDir}/${fileName}.tar.gz" ]; then
+                echo "find 1.1 - Found first backup for today"
+                let i=i+1
+            else 
+                echo "find 1.2 - Can continue with backup"
+                let found="true"
             fi
         else
-            # ~/backups/spigot_2021-01-18_#1
-            if [ -d "${backupDir}/spigot_${dateFileName}_#${currentFound}.tar.gz" ]; then
-                currentFound=$((currentFound+1))
+            echo "Checking for $i backup for today"
+
+            if [ -f "${backupDir}/${fileName}_num${i}.tar.gz" ]; then
+                echo "find 2.1 - Found first backup for today"
+                let i=i+1
             else
-                foundEnd="true"
+                echo "find 2.2 - Can continue with backup"
+                let found="true"
             fi
         fi
     done
 
-    if [ "${currentFound}"==0 ]; then
-        fileName="${dateFileName}"
-    else
-        fileName="${dateFileName}_#${currentFound}"
+    if [ "$i" != 0 ]; then
+        fileName="${fileName}_num${i}"
     fi
+
     echo "File will be named ${fileName}"
-}
-
-removeTodayDir() {
-    echo "Task 0.2.1: Deleting old backups directory"
-    rm -rf "${backupDir}/spigot_${fileName}"
-}
-
-removeTodayTar() {
-    echo "Task 0.2.1: Deleting old backups directory"
-    rm -rf "${backupDir}/${fileName}.tar.gz"
-}
-
-backupPath() {
-    foundEnd="false"
-    currentFound=0
-    while [ "$found" == "false" ];
-    do
-        if [ "${currentFound}" == 0 ]; then
-            if [ -d "${backupDir}/spigot_${fileName}" ]; then
-                currentFound=$((currentFound+1))
-            fi
-        else
-            if [ -d "${backupDir}/spigot_${fileName}_${currentFound}" ]; then
-                currentFound=$((currentFound+1))
-            else
-                foundEnd="true"
-            fi
-        fi
-    done
-    amountToday=`${currentFound}`
-
-    sleep 2
 }
 
 task0_1() {
@@ -74,7 +52,7 @@ task0_1() {
     if [ ! -d "${backupDir}" ]; then
         echo "Backups directory did not previously exist"
         echo "Task 0.1.1: Creating backups directory"
-        # creates backups directory if it doesn't exist
+        # creates backups directory if it doesnt exist
         mkdir "${backupDir}"
     else
         echo "Backups directory previously existed, creation skipped"
@@ -86,11 +64,12 @@ task0_1() {
 task0_2() {
     echo "Task 0.2: Checking if backup directory for today exists"
     # echo "hello_${backupDir}"
+    echo "${backupDir}/spigot_${fileName}"
     if [ -d "${backupDir}/spigot_${fileName}" ]; then
+    
         if [ "$1" == "-f" ]; then
-            removeTodayDir
-        elif [ "$1" == "-s" ]; then
-            backupPath
+            echo "Task 0.2.1: Deleting old backups directory"
+            rm -rf "${backupDir}/spigot_${fileName}"
         else
             echo "ERROR: Please add -f to force delete old backup for today"
             echo "Unable to continue"
@@ -104,7 +83,8 @@ task0_3() {
     echo "Task 0.3: Checking if backup tar for today exists"
     if [ -d "${backupDir}/${fileName}.tar.gz" ]; then
         if [ "$1" == "-f" ]; then
-            removeTodayTar
+            echo "Task 0.2.1: Deleting old backups directory"
+            rm -rf "${backupDir}/${fileName}.tar.gz"
         else 
             echo "ERROR: Please add -f to force delete old backup for today"
             echo "Unable to continue"
@@ -130,7 +110,8 @@ task2_0() {
     # creates tar
     echo "Starting Task 2"
     echo "Task 2.0: CD to Spigot Directory"
-    cd `${mainDir}`
+    cd "${mainDir}"
+    pwd
 }
 
 task2_1() {
@@ -187,7 +168,7 @@ task5() {
 #   echo "$var"
 # done
 
-programRuntime() {
+programRun() {
     task0_1
     task0_2
     task0_3
@@ -200,10 +181,11 @@ programRuntime() {
     task5
 }
 
+echo $1
 if [ "$1" == "-s" ]; then
     findCurrentAmount
 fi
 
-programRuntime
+programRun
 
 echo "Thank you for using the Spigot Backup Script"
