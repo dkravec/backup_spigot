@@ -147,7 +147,7 @@ task4() {
         mkdir "./spigot_${fileName}"
 
         echo "Task 4.2: Unzipping tar to new directory"
-        tar "-xf ${fileName}.tar.gz -C ./spigot_${fileName}"
+        tar -xf "${fileName}".tar.gz -C ./spigot_"${fileName}"
         echo "Task 4 Complete"
     # else 
         # echo "Skipping Task 4.2: Unzipping tar to new directory"
