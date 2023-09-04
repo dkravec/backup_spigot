@@ -7,6 +7,8 @@ amountToday=0
 
 backupDir=~/backups/spigot
 mainDir=~/tank/spigot
+dockerName=spigot
+
 # backupDir=~/Backups
 # mainDir=~/Developer/cheese
 fileName=`${dateFileName}`
@@ -99,9 +101,9 @@ task1() {
     # stops mc
     echo "Starting Task 1"
     echo "Task 1.0: Stopping Spigot Server"
-    docker exec spigot mc_stop
+    docker exec "${dockerName}" mc_stop
     echo "Task 1.1 -- Stopping Spigot Container"
-    docker stop spigot
+    docker stop "${dockerName}"
     echo "Task 1 Complete"
     sleep 1
 }
@@ -159,7 +161,7 @@ task5() {
     # starts mc
     echo "Starting Task 5"
     echo "Task 5.0: Starting Spigot Container"
-    docker start spigot
+    docker start "${dockerName}"
     echo "Task 5 Complete"
 }
 

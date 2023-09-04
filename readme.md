@@ -4,6 +4,36 @@ Created by Daniel Kravec, by Daniel Kravec
 ## Description
 This is a simple script that will backup your spigot server. It will create a folder with the date of the backup as the name.
 
+## Usage
+
+1. Edit varibles
+
+Change the varibles, according to your spigot+docker setup.
+
+| Varibles | Description |
+| -- | -- |
+| backupDir | Location where you want to save the copy of the minecraft files. |
+| mainDir | The directory where the orginal minecraft files are stored for the container. |
+| dockerName | Name of your docker container containing spigot run. |
+| fileName | Name of your backup zip file (default is the date). |
+
+---
+
+2. Run file
+
+After running this command, the script will run and copy all the data into a .zip file
+
+
+I. without any flags
+
+```bash main.bash```
+
+II. with flags
+
+```bash main.bash (flag1) (flag2) (more)```
+
+
+
 ## Flags
 | Flags | Description |
 | --- | --- |
@@ -54,3 +84,14 @@ This is a simple script that will backup your spigot server. It will create a fo
 
 ### v1.1.3 (11.2023.02.02)
 - Fixed bug where tar wouldn't unzip into folder, due to how line was written with varibles.
+
+### v1.1.4 (12.2023.09.03)
+- Now supports different docker container names.
+- Added how to run script in readme.
+
+
+---
+
+errors known:
+
+tar: .: file changed as we read it
