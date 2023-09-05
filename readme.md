@@ -41,6 +41,8 @@ II. with flags
 | -f | Force backup, even if it exists for today. **!!Will delete existing backup from current day!!** |
 | -h | Show the help menu. |
 | -u | Unzip the tar right away. |
+| -v | Shows current version of script. |
+| -c | Clears the terminal before running script. |
 
 ## Version History
 ### v1.0 (1.2023.01.18)
@@ -95,8 +97,20 @@ II. with flags
   - clears terminal by default
   - Has startRun() and endRun() functions, to make it easier to understand the script.
 
+### v1.2 (14.2023.09.05)
+- Added version checking to script. (-v)
+- Added comments to each function.
+- Doesn't clear terminal by default, but can be done with (-c) flag.
+- Mutiple flags can be added. (ex. -c -v -f)
+  - Flags can be added in any order.
+  - Flags will be ran in a specific order after.
+- added future updates, and errors known to readme.
+
 ---
+### future updates
+- option to not unzip 
+- change directory for backup just for one backup
 
-errors known:
-
-tar: .: file changed as we read it
+### errors known:
+- tar: .: file changed as we read it
+- some commands are unavalible (currently commented )
