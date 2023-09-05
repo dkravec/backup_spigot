@@ -1,8 +1,6 @@
 #! /bin/sh
 dateFileName="date +%Y-%m-%d"
-echo "Starting Spigot Backup Script"
 
-echo "Files will be named : `${dateFileName}`"
 amountToday=0
 
 backupDir=~/backups/spigot
@@ -46,6 +44,14 @@ findCurrentAmount() {
     fi
 
     echo "File will be named ${fileName}"
+}
+
+
+helpMenuShow() {
+    echo "-s    Creates secondary backup for today if it already exists";
+    echo "-f    Forces backup, even if it already exists for today !!WILL DELETE PREVIOUS BACKUP FROM TODAY!!";
+    echo "-h    Shows the help menu";
+    echo "-u    Will unzip the tar file right away";
 }
 
 task0_1() {
@@ -165,12 +171,30 @@ task5() {
     echo "Task 5 Complete"
 }
 
+startRun() {
+    clear
+    echo "--------------"
+    echo "Starting Spigot Backup Script"
+    echo ""
+
+}
+
+endRun() {
+    echo ""
+    echo "Thank you for using the Spigot Backup Script"
+    echo "--------------"
+
+    exit 0;
+}
+
 # for var in "$@"
 # do
 #   echo "$var"
 # done
 
 programRun() {
+    echo "Files will be named : ${fileName}"
+
     task0_1
     task0_2
     task0_3
@@ -183,11 +207,18 @@ programRun() {
     task5
 }
 
-echo $1
+startRun
+
+#echo $1
+
 if [ "$1" == "-s" ]; then
     findCurrentAmount
 fi
 
-programRun
+if [ "$1" == "-h" ]; then
+    helpMenuShow
+    endRun
+fi
 
-echo "Thank you for using the Spigot Backup Script"
+programRun
+endRun

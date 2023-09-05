@@ -89,6 +89,11 @@ II. with flags
 - Now supports different docker container names.
 - Added how to run script in readme.
 
+### v1.1.5 (13.2023.09.04)
+- Created a help menu within the script.
+- Changed way script is run.
+  - clears terminal by default
+  - Has startRun() and endRun() functions, to make it easier to understand the script.
 
 ---
 
